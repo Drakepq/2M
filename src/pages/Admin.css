@@ -424,3 +424,13 @@
 .catalog-search {
   max-width: 260px;
 }
+
+:root[data-theme="light"] .admin-layout{--admin-bg:#f7f7f5;--admin-panel:#fff;--admin-border:#e7e6e1;--admin-text:#292923;--admin-muted:#77766f;--admin-gold:#c79b3b;color:#292923;background:#f7f7f5}
+:root[data-theme="light"] .admin-sidebar{background:#fff;border-right-color:#e7e6e1}
+:root[data-theme="light"] .admin-nav button{color:#55554e}
+:root[data-theme="light"] .admin-nav button:hover,:root[data-theme="light"] .admin-nav button.active{color:#9a7429;background:#f7f3e9;border-color:#e8d9b8}
+:root[data-theme="light"] .admin-panel p{color:#55554e}
+:root[data-theme="light"] .admin-form label,:root[data-theme="light"] .notes-label{color:#55554e}
+:root[data-theme="light"] .admin-form input,:root[data-theme="light"] .admin-form select,:root[data-theme="light"] .admin-form textarea,:root[data-theme="light"] .search-input,:root[data-theme="light"] .notes-label textarea,:root[data-theme="light"] .price-edit input,:root[data-theme="light"] .qty-input{color:#292923;background:#fafaf8;border-color:#deddd7}
+:root[data-theme="light"] .customer-row,:root[data-theme="light"] .order-head,:root[data-theme="light"] .product-row{color:#292923;background:#fff;border-color:#e7e6e1}
+:root[data-theme="light"] .admin-button.secondary{color:#45453e;background:#f5f4f0;border-color:#deddd7}

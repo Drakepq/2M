@@ -69,6 +69,7 @@ export default function Cliente() {
   const [checking, setChecking] = useState(true)
 
   const [products, setProducts] = useState<Product[]>([])
+  const [promoPrices, setPromoPrices] = useState<Record<string, number>>({})
   const [orders, setOrders] = useState<Order[]>([])
 
   // Lista que se está armando. Si editingId tiene valor, se edita un pedido pendiente.
@@ -111,7 +112,7 @@ export default function Cliente() {
       setEmail(data.user.email || '')
       setName(data.user.user_metadata?.name || 'Cliente')
 
-      const [customerRes, productsRes, ordersRes] = await Promise.all([
+      const [customerRes, productsRes, ordersRes, promosRes] = await Promise.all([
         supabase
           .from('clientes')
           .select('id')
@@ -127,6 +128,7 @@ export default function Cliente() {
             'id, created_at, total, status, detalle_pedido(id, product_id, product_name, quantity, unit_price, line_total)',
           )
           .order('created_at', { ascending: false }),
+        supabase.from('promociones').select('product_id, precio_promo, fecha_fin'),
       ])
 
       if (!active) return
@@ -142,6 +144,10 @@ export default function Cliente() {
         )
       }
 
+      const hoy = new Date().toISOString().slice(0, 10)
+      const pp: Record<string, number> = {}
+      for (const r of promosRes.data || []) if (r.product_id && (!r.fecha_fin || r.fecha_fin >= hoy)) pp[r.product_id] = Number(r.precio_promo)
+      setPromoPrices(pp)
       setCustomerId(customerRes.data?.id ?? null)
       setProducts((productsRes.data || []) as Product[])
       setOrders((ordersRes.data || []) as Order[])
@@ -189,7 +195,7 @@ export default function Cliente() {
           product_id: product.id,
           product_name: product.name,
           quantity: 1,
-          unit_price: Number(product.price ?? 0),
+          unit_price: promoPrices[product.id] ?? Number(product.price ?? 0),
         },
       ]
     })
@@ -428,7 +434,7 @@ export default function Cliente() {
                         </span>
 
                         <span className="client-suggestion-side">
-                          {product.price != null && money(Number(product.price))}
+                          {product.price != null && money(promoPrices[product.id] ?? Number(product.price))}
                           <b>+ Agregar</b>
                         </span>
                       </button>

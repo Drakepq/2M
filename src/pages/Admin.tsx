@@ -7,6 +7,8 @@ import {
 } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
 import { supabase, isSupabaseConfigured } from '../lib/supabase'
+import AdminPromos from './AdminPromos'
+import AdminFotos from './AdminFotos'
 import './Admin.css'
 
 type Customer = {
@@ -53,6 +55,8 @@ type CartItem = {
 }
 
 type Section =
+  | 'fotos'
+  | 'promociones'
   | 'dashboard'
   | 'clientes'
   | 'productos'
@@ -994,6 +998,8 @@ export default function Admin() {
             ['productos', 'Lista de compra'],
             ['pendientes', pendingOrders.length ? `Listas pendientes (${pendingOrders.length})` : 'Listas pendientes'],
             ['precios', 'Productos y precios'],
+            ['promociones', 'Promociones'],
+            ['fotos', 'Fotos de productos'],
             ['cuentas', 'Listas guardadas']
           ] as [Section, string][]).map(
             ([id, label]) => (
@@ -1943,6 +1949,9 @@ export default function Admin() {
         {/* =================================================
             LISTAS PENDIENTES (pedidos de clientes)
         ================================================= */}
+
+        {section === 'promociones' && <AdminPromos />}
+        {section === 'fotos' && <AdminFotos />}
 
         {section === 'pendientes' && (
           <section className="admin-panel">

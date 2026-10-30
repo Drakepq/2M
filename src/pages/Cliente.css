@@ -55,3 +55,12 @@
 .client-remove{padding:8px 10px;color:#e7b6a9;font-size:12px;background:transparent;border:1px solid #54332c;border-radius:7px;cursor:pointer}
 @media(max-width:900px){.client-layout{grid-template-columns:1fr}}
 @media(max-width:520px){.client-header{padding:0 5%}.client-header nav{gap:12px}.client-panel-head{flex-direction:column}.client-list-row{grid-template-columns:minmax(0,1fr) 72px}.client-remove{grid-column:1/-1}}
+
+
+:root[data-theme="light"] .client-layout{background:#f7f7f5;color:#292923}
+:root[data-theme="light"] .client-header,:root[data-theme="light"] .client-panel,:root[data-theme="light"] .client-order,:root[data-theme="light"] .client-suggestions,:root[data-theme="light"] .client-suggestion,:root[data-theme="light"] .client-list-row{background:#fff;color:#292923;border-color:#e7e6e1}
+:root[data-theme="light"] .client-header,:root[data-theme="light"] .client-panel-head{border-color:#e7e6e1}
+:root[data-theme="light"] .client-search,:root[data-theme="light"] .client-list-row input{color:#292923;background:#fafaf8;border-color:#deddd7}
+:root[data-theme="light"] .client-suggestion{color:#292923}
+:root[data-theme="light"] .client-order-head{color:#292923}
+:root[data-theme="light"] .client-estimate,:root[data-theme="light"] .client-cancel{color:#55554e}

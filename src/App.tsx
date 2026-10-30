@@ -7,19 +7,8 @@ import Registro from './pages/Registro'
 import Cliente from './pages/Cliente'
 import Verificado from './pages/Verificado'
 import Admin from './pages/Admin'
+import Tienda from './pages/Tienda'
 import './store.css'
-
-function Home({ email, isAdmin }: { email: string | null; isAdmin: boolean }) {
-  const destino = !email ? '/acceso' : isAdmin ? '/admin' : '/cliente'
-  return <main className="landing"><nav className="topnav"><Link className="brand" to="/">2M<span>.</span> ABARROTES</Link>
-    <div style={{display:'flex',gap:10}}>
-      {!email && <Link className="outline" to="/registro">Crear cuenta</Link>}
-      <Link className="primary" to={destino}>{!email ? 'Iniciar sesión' : isAdmin ? 'Ir al dashboard' : 'Mi cuenta'}</Link>
-    </div></nav>
-    <section className="landing-hero"><p className="eyebrow">MERCADO 2 DE MAYO · CHIMBOTE</p><h1>La cuenta de siempre,<br/><em>ahora más fácil.</em></h1><p>Un espacio para organizar las compras de tus clientes, guardar sus listas y consultar sus cuentas sin depender del cuaderno físico.</p><div style={{display:'flex',gap:12,flexWrap:'wrap'}}><Link className="primary" to={destino}>{!email ? 'Iniciar sesión ↗' : isAdmin ? 'Ir al dashboard ↗' : 'Mi cuenta ↗'}</Link>{!email && <Link className="outline" to="/registro">Crear cuenta</Link>}</div><div className="hero-note">Registro de clientes · Listas de productos · Cuentas guardadas</div></section>
-    <footer>TIENDA DE ABARROTES <span>·</span> MERCADO 2 DE MAYO, CHIMBOTE</footer>
-  </main>
-}
 
 function AdminDenied() {
   return <main className="auth-page"><section className="auth-card">
@@ -31,6 +20,16 @@ function AdminDenied() {
 }
 
 export default function App() {
+  const [theme, setTheme] = useState<'dark' | 'light'>(() => {
+    const saved = localStorage.getItem('2m-theme')
+    return saved === 'light' ? 'light' : 'dark'
+  })
+
+  useEffect(() => {
+    document.documentElement.dataset.theme = theme
+    localStorage.setItem('2m-theme', theme)
+  }, [theme])
+
   const [sessionReady, setSessionReady] = useState(false)
   const [userId, setUserId] = useState<string | null>(null)
   const [email, setEmail] = useState<string | null>(null)
@@ -110,8 +109,14 @@ export default function App() {
   const home = userId && roleReady ? (isAdmin ? '/admin' : '/cliente') : null
 
   return (
+    <>
+    <div className="theme-picker" aria-label="Selector de tema">
+      <span>Tema</span>
+      <button type="button" className={theme === 'light' ? 'selected' : ''} onClick={() => setTheme('light')} aria-pressed={theme === 'light'}>☀ Claro</button>
+      <button type="button" className={theme === 'dark' ? 'selected' : ''} onClick={() => setTheme('dark')} aria-pressed={theme === 'dark'}>☾ Oscuro</button>
+    </div>
     <Routes>
-      <Route path="/" element={<Home email={email} isAdmin={isAdmin} />} />
+      <Route path="/" element={<Tienda email={email} isAdmin={isAdmin} />} />
 
       <Route path="/acceso" element={home ? <Navigate to={home} replace /> : <Acceso onLogin={refreshSession} />} />
       <Route path="/registro" element={home ? <Navigate to={home} replace /> : <Registro onLogin={refreshSession} />} />
@@ -135,5 +140,6 @@ export default function App() {
 
       <Route path="*" element={<Navigate to="/" replace />} />
     </Routes>
+    </>
   )
 }

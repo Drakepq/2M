@@ -33,3 +33,9 @@ El proyecto utiliza **http://localhost:5175/** para no interferir con el proyect
 
 ## Importante
 Los permisos del panel dependen del rol **admin** (tabla `usuarios_roles`). Si no ejecutas el SQL, cualquier cuenta registrada tendría acceso a los datos del panel. Las cuentas guardadas contienen el total y el detalle de productos al precio del momento de la compra.
+
+## Precios y promociones (nuevo)
+Ejecuta `supabase_precios_promociones.sql` en Supabase > SQL Editor. Carga los precios, crea la tabla `promociones` y permite que la tienda pública muestre el catálogo. Las promociones se administran en el panel > **Promociones**.
+
+## Fotos reales de productos
+Ejecuta `supabase_imagenes.sql`. Luego, en el panel > **Fotos de productos**, sube la foto de cada producto y su marca. También puedes poner archivos en `public/productos/` con el nombre del producto (ej. `aceite-vegetal.jpg`).
