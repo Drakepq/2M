@@ -108,8 +108,18 @@ export default function Tienda({ email, isAdmin }: { email: string | null; isAdm
       supabase.from('promociones').select('id,product_id,precio_promo,fecha_fin').order('created_at', { ascending: false }),
     ]).then(async ([a, b]) => {
       let data = a.data
-      if (a.error) data = (await supabase.from('productos').select('id,name,category,unit,price').order('name')).data // aún sin supabase_imagenes.sql
-      setProds(((data || []) as Partial<Prod>[]).map(p => ({ image_url: null, marca: null, ...p })) as Prod[])
+if (a.error) {
+  const fallback = (await supabase
+    .from('productos')
+    .select('id,name,category,unit,price')
+    .order('name')).data
+
+  data = fallback?.map(p => ({
+    ...p,
+    image_url: null,
+    marca: null
+  })) ?? null
+}      setProds(((data || []) as Partial<Prod>[]).map(p => ({ image_url: null, marca: null, ...p })) as Prod[])
       const hoy = new Date().toISOString().slice(0, 10)
       setPromos(((b.data || []) as Promo[]).filter(p => !p.fecha_fin || p.fecha_fin >= hoy))
     })

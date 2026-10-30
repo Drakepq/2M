@@ -153,8 +153,15 @@ export default function AdminFotos() {
                   title="Arrastra la imagen para elegir qué parte se verá"
                   onWheel={e => { e.preventDefault(); setZoom(current => Math.min(3, Math.max(1, Number((current + (e.deltaY < 0 ? 0.1 : -0.1)).toFixed(2))))) }}
                 >
-                  <img src={previewUrl} alt="Vista previa recortable del producto" style={{ objectFit: fit, objectFit: fit, transform: `translate(${(x / FRAME_W) * 100}%, ${(y / FRAME_H) * 100}%) scale(${zoom})` }} draggable={false} />
-                  <span className="foto-crop-hint">Arrastra para encuadrar</span>
+<img
+  src={previewUrl}
+  alt="Vista previa recortable del producto"
+  style={{
+    objectFit: fit,
+    transform: `translate(${(x / FRAME_W) * 100}%, ${(y / FRAME_H) * 100}%) scale(${zoom})`
+  }}
+  draggable={false}
+/>                  <span className="foto-crop-hint">Arrastra para encuadrar</span>
                 </div>
                 <small className="foto-preview-note">El marco muestra exactamente el recorte que se guardará en la tienda.</small>
               </div>

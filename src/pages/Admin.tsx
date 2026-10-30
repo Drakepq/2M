@@ -965,17 +965,16 @@ export default function Admin() {
     )
   }
 
-  const sectionTitles: Record<
-    Section,
-    string
-  > = {
-    dashboard: 'Dashboard',
-    clientes: 'Clientes',
-    productos: 'Lista de compra',
-    pendientes: 'Listas pendientes',
-    precios: 'Productos y precios',
-    cuentas: 'Listas guardadas'
-  }
+const sectionTitles: Record<Section, string> = {
+  dashboard: 'Dashboard',
+  clientes: 'Clientes',
+  productos: 'Lista de compra',
+  pendientes: 'Listas pendientes',
+  precios: 'Productos y precios',
+  cuentas: 'Listas guardadas',
+  promociones: 'Promociones',
+  fotos: 'Fotografías de productos'
+}
 
   return (
     <div className="admin-layout">
