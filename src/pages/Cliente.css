@@ -5,7 +5,7 @@
 .client-header nav{display:flex;align-items:center;gap:20px;font-size:13px}
 .client-header nav a{color:#c7c0b6}
 .client-header nav button{padding:9px 14px;color:#e7b6a9;font-size:12px;background:#2a1d1a;border:1px solid #54332c;border-radius:8px;cursor:pointer}
-.client-content{max-width:1250px;padding:60px 7%}
+.client-content{max-width:none;padding:48px 4% 60px}
 .client-eyebrow{color:#d7b46a;font-size:10px;font-weight:800;letter-spacing:2px;margin:0}
 .client-content h1{font-family:'Playfair Display',Georgia,serif;font-size:clamp(32px,5vw,52px);font-weight:500;margin:12px 0 8px}
 .client-email{color:#a5a195;margin:0 0 32px}
@@ -14,7 +14,9 @@
 .client-panel-head{display:flex;align-items:flex-start;justify-content:space-between;gap:16px;margin-bottom:20px}
 .client-panel-head h2{font-size:19px;margin:0 0 6px}
 .client-panel-head p{margin:0;color:#a5a195;font-size:13px}
-.client-layout{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:20px;align-items:start}
+.client-layout{display:grid;grid-template-columns:minmax(330px,420px) minmax(0,1fr);gap:24px;align-items:start}
+.client-side{display:grid;gap:20px;min-width:0;position:sticky;top:16px;max-height:calc(100vh - 32px);overflow-y:auto;scrollbar-width:thin}
+.client-shop{min-width:0}
 .client-history-title{font-size:19px;margin:10px 0 18px}
 .client-actions{display:flex;flex-wrap:wrap;gap:10px;margin-top:20px}
 .client-cancel{min-height:42px;padding:0 16px;color:#d5d0c5;font-size:12px;background:transparent;border:1px solid #49463b;border-radius:8px;cursor:pointer}
@@ -53,14 +55,39 @@
 .client-list-row input{width:100%;padding:9px;color:#f4f0e7;background:#10100f;border:1px solid #414038;border-radius:7px;outline:none;font:inherit}
 .client-list-row input:focus{border-color:#d7b46a}
 .client-remove{padding:8px 10px;color:#e7b6a9;font-size:12px;background:transparent;border:1px solid #54332c;border-radius:7px;cursor:pointer}
-@media(max-width:900px){.client-layout{grid-template-columns:1fr}}
+@media(max-width:1000px){.client-layout{grid-template-columns:1fr}.client-side{position:static;max-height:none;overflow:visible}}
 @media(max-width:520px){.client-header{padding:0 5%}.client-header nav{gap:12px}.client-panel-head{flex-direction:column}.client-list-row{grid-template-columns:minmax(0,1fr) 72px}.client-remove{grid-column:1/-1}}
 
 
-:root[data-theme="light"] .client-layout{background:#f7f7f5;color:#292923}
-:root[data-theme="light"] .client-header,:root[data-theme="light"] .client-panel,:root[data-theme="light"] .client-order,:root[data-theme="light"] .client-suggestions,:root[data-theme="light"] .client-suggestion,:root[data-theme="light"] .client-list-row{background:#fff;color:#292923;border-color:#e7e6e1}
-:root[data-theme="light"] .client-header,:root[data-theme="light"] .client-panel-head{border-color:#e7e6e1}
-:root[data-theme="light"] .client-search,:root[data-theme="light"] .client-list-row input{color:#292923;background:#fafaf8;border-color:#deddd7}
-:root[data-theme="light"] .client-suggestion{color:#292923}
-:root[data-theme="light"] .client-order-head{color:#292923}
+/* Tema claro: toda la página de Mi cuenta */
+:root[data-theme="light"] .client-loading{background:#f7f7f5;color:#77766f}
+:root[data-theme="light"] .client-page{color:#292923;background:#f7f7f5}
+:root[data-theme="light"] .client-header{background:#fff;border-color:#e7e6e1}
+:root[data-theme="light"] .client-logo{color:#b8892d}
+:root[data-theme="light"] .client-header nav a{color:#45453e}
+:root[data-theme="light"] .client-header nav a:hover{color:#b8892d}
+:root[data-theme="light"] .client-header nav button{color:#fff;background:#292923;border-color:#292923}
+:root[data-theme="light"] .client-eyebrow{color:#b8892d}
+:root[data-theme="light"] .client-content h1{color:#292923}
+:root[data-theme="light"] .client-email,:root[data-theme="light"] .client-panel-head p,:root[data-theme="light"] .client-empty,:root[data-theme="light"] .client-order-head small,:root[data-theme="light"] .client-suggestion small,:root[data-theme="light"] .client-list-row small,:root[data-theme="light"] .client-estimate small{color:#77766f}
+:root[data-theme="light"] .client-panel{background:#fff;color:#292923;border-color:#e7e6e1;box-shadow:0 4px 18px #25251a0d}
+:root[data-theme="light"] .client-panel-head h2,:root[data-theme="light"] .client-history-title{color:#292923}
+:root[data-theme="light"] .client-order,:root[data-theme="light"] .client-list-row,:root[data-theme="light"] .client-suggestions{background:#fafaf8;border-color:#e7e6e1;color:#292923}
+:root[data-theme="light"] .client-order-head,:root[data-theme="light"] .client-suggestion{color:#292923}
+:root[data-theme="light"] .client-suggestion{background:#fff;border-color:#e7e6e1}
+:root[data-theme="light"] .client-suggestion:hover{background:#fbf6e8;border-color:#c79b3b}
+:root[data-theme="light"] .client-order-detail{border-color:#e7e6e1}
+:root[data-theme="light"] .client-search,:root[data-theme="light"] .client-list-row input{color:#292923;background:#fff;border-color:#deddd7}
+:root[data-theme="light"] .client-search:focus,:root[data-theme="light"] .client-list-row input:focus{border-color:#c79b3b}
+:root[data-theme="light"] .client-search-box{color:#45453e}
 :root[data-theme="light"] .client-estimate,:root[data-theme="light"] .client-cancel{color:#55554e}
+:root[data-theme="light"] .client-cancel{border-color:#cfcdc4}
+:root[data-theme="light"] .client-estimate b,:root[data-theme="light"] .client-suggestion-side b{color:#b8892d}
+:root[data-theme="light"] .client-suggestion-side{color:#45453e}
+:root[data-theme="light"] .client-edit,:root[data-theme="light"] .client-save{background:#c79b3b;border-color:#c79b3b;color:#fff}
+:root[data-theme="light"] .client-status.pending{color:#8a6414;background:#fbf1d8;border-color:#e6cf8f}
+:root[data-theme="light"] .client-status.done{color:#1f6b35;background:#e3f4e7;border-color:#a8d8b3}
+:root[data-theme="light"] .client-remove{color:#b0261c;border-color:#e8b9b3}
+:root[data-theme="light"] .client-alert.error{color:#8f1f15;background:#fdeceb;border-color:#efb5af}
+:root[data-theme="light"] .client-alert.success{color:#1f6b35;background:#e3f4e7;border-color:#a8d8b3}
+:root[data-theme="light"] .catalogo .muted{color:#77766f}

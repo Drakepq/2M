@@ -1,4 +1,4 @@
--- PRECIOS + PROMOCIONES (ejecutar una vez en Supabase > SQL Editor > Run)
+-- 04 · PRECIOS + PROMOCIONES (ejecutar una vez en Supabase > SQL Editor > Run)
 -- Precios referenciales en soles para tienda de abarrotes (Chimbote, Mercado 2 de Mayo).
 -- Ajústalos cuando quieras desde el panel: "Productos y precios".
 
@@ -17,9 +17,18 @@ from (values
 ) as v(nombre, precio)
 where p.name = v.nombre;
 
--- Promociones (se recrea la tabla: borra cualquier tabla "promociones" anterior)
-drop table if exists public.promociones cascade;
-create table public.promociones (
+-- Promociones: si la tabla ya existe con las columnas correctas se conserva;
+-- si no existe, o es una versión vieja (p. ej. con "active" en vez de "activa"), se recrea.
+do $$
+begin
+  if exists (select 1 from information_schema.tables where table_schema='public' and table_name='promociones')
+     and not exists (select 1 from information_schema.columns
+                     where table_schema='public' and table_name='promociones' and column_name='activa') then
+    drop table public.promociones cascade;
+  end if;
+end $$;
+
+create table if not exists public.promociones (
   id uuid primary key default gen_random_uuid(),
   titulo text not null,
   descripcion text,

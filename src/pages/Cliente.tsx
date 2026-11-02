@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
 import { supabase } from '../lib/supabase'
+import Catalogo from './Catalogo'
 import './Cliente.css'
 
 type Product = {
@@ -392,6 +393,7 @@ export default function Cliente() {
         <p className="client-email">{email}</p>
 
         <div className="client-layout">
+         <div className="client-side">
           {/* ---------- Armar lista ---------- */}
           <div className="client-panel">
             <div className="client-panel-head">
@@ -600,6 +602,12 @@ export default function Cliente() {
               </div>
             )}
           </div>
+         </div>
+
+         {/* ---------- Catálogo: buscador, categorías, promociones y productos ---------- */}
+         <div className="client-shop">
+           <Catalogo onAdd={addProduct} />
+         </div>
         </div>
       </section>
     </main>

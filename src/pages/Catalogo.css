@@ -1,0 +1,10 @@
+/* Catálogo dentro de "Mi cuenta" */
+.catalogo{min-width:0}
+.catalogo .t-bar{position:static;flex-wrap:wrap;gap:12px;padding:0 0 16px;background:transparent;border:0;backdrop-filter:none}
+.catalogo .t-search{flex:1 1 260px}
+.catalogo .t-cats{flex:1 1 100%;flex-wrap:wrap;overflow:visible}
+.catalogo .t-sec{padding:18px 0 6px}
+.catalogo .t-sec:first-of-type{padding-top:6px}
+.catalogo .t-grid{grid-template-columns:repeat(auto-fill,minmax(170px,1fr))}
+:root[data-theme="light"] .catalogo .t-bar{background:transparent;border:0}
+@media(max-width:760px){.catalogo .t-grid{grid-template-columns:repeat(2,1fr)}}
